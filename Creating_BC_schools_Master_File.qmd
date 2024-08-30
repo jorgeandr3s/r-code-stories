@@ -1,0 +1,144 @@
+---
+title: "Creating the BC Schools Master File"
+author: "Jorge Andrés Delgado-Ron"
+affiliation: "CHART Lab"
+format: html
+editor: visual
+project:
+  type: website
+  output-dir: docs
+---
+
+## Data sources
+
+```{r include=FALSE}
+library(dplyr)
+```
+
+This document uses two data sources:
+
+1.  The mailing information for all schools from the BC School District and Contact Information website (<https://bcschoolcontacts.gov.bc.ca/>). Click "Download Schools Info" followed up by "All schools"; and
+
+2.  BC Stats' Translation of Place Names into Administrative Areas. You can search this file with quotation marks at the BC Stats website ([https://www2.gov.bc.ca/gov/search)](https://www2.gov.bc.ca/gov/search?id=2E4C7D6BCAA4470AAAD2DCADF662E6A0&q=%22Translation%20of%20Place%20Names%20into%20Administrative%20Areas%22), but you will have better luck with the direct link (below).
+
+Loading the files:
+
+```{r}
+mailing <- read.csv("allschoolcontacts.csv", na.strings = "") %>%
+  janitor::clean_names() %>% 
+  select(district_number, 
+         school_code, 
+         school_name, 
+         postal_code,
+         physical_postal_code,
+         school_category, 
+         type,
+         city) %>% 
+  rename(school_district = district_number)
+# You may select other variables in the future 
+# (e.g., enrollment for some grades)
+
+admin_areas <- openxlsx::read.xlsx("https://www2.gov.bc.ca/assets/gov/data/geographic/land-use/administrative-boundaries/translation_place_names2019.xlsx", startRow = 4)%>% 
+  janitor::clean_names() %>% 
+  slice(.,-1) %>% #The first row is empty data
+  rename(health_authority_name = x11) 
+```
+
+Let's take a look at the `mailing` dataset:
+
+```{r}
+glimpse(mailing)
+```
+
+It looks like the schools have two postal codes. We need the physical postal code because we are interested in the distance from the school to the student's house. But most schools only provided this information under "postal code". So we need to do some cleaning here:
+
+```{r}
+# If the physical_postal_code variable is not empty, I want it to replace the postal_code variable
+
+mailing$postal_code <- ifelse(!is.na(mailing$physical_postal_code), #condition
+                              mailing$physical_postal_code, #true 
+                              mailing$postal_code) #false
+
+# Now we can delete redundant information
+mailing$physical_postal_code <- NULL
+```
+
+We also need the short version of the postal code for later.
+
+```{r}
+# substr (target, first_character, last_character)
+mailing$short_postal_code <- substr(mailing$postal_code,1,3)
+```
+
+Now that everything is sorted, we can just add the health authorities from the admin_areas file.
+
+```{r}
+# I am telling R to match the two dataframes by school_district, then to find the health_authority_name  variable in the admin_areas dataframe.
+mailing$health_authority <-
+  admin_areas$health_authority_name[match(mailing$school_district,
+                                          admin_areas$school_district)]
+
+# That is all I needed from this dataframe
+admin_areas <- NULL
+```
+
+Did everyone get a health authority?
+
+```{r}
+round(100*prop.table(table(!is.na(mailing$health_authority))),1)
+```
+
+It looks like a few entries did not. Let's find out which districts are missing.
+
+```{r}
+unique(mailing$school_district[is.na(mailing$health_authority)])
+```
+
+Ok, I just googled it!
+
+*The Conseil scolaire francophone de la Colombie-Britannique is the French-language school board for all French schools located in British Columbia.*
+
+This is an interesting problem because district 93 is the only one that can be located in many health authorities. So, we are going to find the health authority for each school using their 3-character postal code. But first, I want to make sure all missing postal codes can be matched with existing postal codes.
+
+```{r}
+
+lost_postal_codes <- mailing$short_postal_code[is.na(mailing$health_authority)]
+known_postal_codes <- mailing$short_postal_code[!is.na(mailing$health_authority)]
+
+table(lost_postal_codes %in% known_postal_codes) #Verifying no one is left behind
+
+```
+
+Success! Now let's get to work. First I want to create a dataframe with short postal codes and health authorities
+
+```{r}
+HA_finder <- mailing  %>% 
+  filter(!is.na(health_authority)) %>% 
+  group_by(short_postal_code) %>% 
+  reframe(HA = health_authority) %>%
+  unique.array() 
+
+glimpse(HA_finder)
+```
+
+Next, I want to separate the French schools from the rest. Technically speaking, this is not really required. But it is easier to understand the code this way.
+
+```{r}
+mailing_complete <- mailing %>% filter(!is.na(health_authority))
+mailing_missing  <- mailing %>% filter(is.na(health_authority))
+```
+
+Now we can match the health authority by postal code, just like we did before with school districts.
+
+```{r}
+mailing_missing$health_authority <-
+  HA_finder$HA[match(mailing_missing$short_postal_code,
+                     HA_finder$short_postal_code)]
+```
+
+Finally, we put together the broken dataframe and save it as csv to import it into the caraspace.
+
+```{r}
+master_file <- rbind(mailing_complete,mailing_missing)
+write.csv(x = master_file, file = "BC_schools_master_file.csv")
+```
