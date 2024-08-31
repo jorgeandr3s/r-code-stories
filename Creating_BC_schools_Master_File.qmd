@@ -6,6 +6,10 @@ format: html
 editor: visual
 ---
 
+## Context
+
+The [Youth Development Instrument](https://chartlab.ca/about-ydi/) (YDI) is a survey of BC youth collected through school personnel. It is used to inform research and policy at the school, district, health authority, and provincial levels. To do so, each individual record is linked to the corresponding administrative area. In the past, such linkages had been done manually, at least in part. The creation of documents and linkages occurred at different data pipeline stages, creating unnecessary delays. As the YDI continues to expand, a decision was made to create a Master File that includes the codes and names of schools, their districts, and health areas.
+
 ## Data sources
 
 ```{r include=FALSE}

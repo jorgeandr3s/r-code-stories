@@ -137,14 +137,14 @@
     "href": "Creating_BC_schools_Master_File.html",
     "title": "Creating the BC Schools Master File",
     "section": "",
-    "text": "This document uses two data sources:\n\nThe mailing information for all schools from the BC School District and Contact Information website (https://bcschoolcontacts.gov.bc.ca/). Click “Download Schools Info” followed up by “All schools”; and\nBC Stats’ Translation of Place Names into Administrative Areas. You can search this file with quotation marks at the BC Stats website (https://www2.gov.bc.ca/gov/search), but you will have better luck with the direct link (below)."
+    "text": "The Youth Development Instrument (YDI) is a survey of BC youth collected through school personnel. It is used to inform research and policy at the school, district, health authority, and provincial levels. To do so, each individual record is linked to the corresponding administrative area. In the past, such linkages had been done manually, at least in part. The creation of documents and linkages occurred at different data pipeline stages, creating unnecessary delays. As the YDI continues to expand, a decision was made to create a Master File that includes the codes and names of schools, their districts, and health areas."
   },
   {
     "objectID": "Creating_BC_schools_Master_File.html#data-sources",
     "href": "Creating_BC_schools_Master_File.html#data-sources",
     "title": "Creating the BC Schools Master File",
-    "section": "",
-    "text": "This document uses two data sources:\n\nThe mailing information for all schools from the BC School District and Contact Information website (https://bcschoolcontacts.gov.bc.ca/). Click “Download Schools Info” followed up by “All schools”; and\nBC Stats’ Translation of Place Names into Administrative Areas. You can search this file with quotation marks at the BC Stats website (https://www2.gov.bc.ca/gov/search), but you will have better luck with the direct link (below)."
+    "section": "Data sources",
+    "text": "Data sources\nThis document uses two data sources:\n\nThe mailing information for all schools from the BC School District and Contact Information website (https://bcschoolcontacts.gov.bc.ca/). Click “Download Schools Info” followed up by “All schools”; and\nBC Stats’ Translation of Place Names into Administrative Areas. You can search this file with quotation marks at the BC Stats website (https://www2.gov.bc.ca/gov/search), but you will have better luck with the direct link (below)."
   },
   {
     "objectID": "Creating_BC_schools_Master_File.html#importing-data",
@@ -166,5 +166,12 @@
     "title": "Creating the BC Schools Master File",
     "section": "Downloads",
     "text": "Downloads\nDownload the file here."
+  },
+  {
+    "objectID": "Creating_BC_schools_Master_File.html#context",
+    "href": "Creating_BC_schools_Master_File.html#context",
+    "title": "Creating the BC Schools Master File",
+    "section": "",
+    "text": "The Youth Development Instrument (YDI) is a survey of BC youth collected through school personnel. It is used to inform research and policy at the school, district, health authority, and provincial levels. To do so, each individual record is linked to the corresponding administrative area. In the past, such linkages had been done manually, at least in part. The creation of documents and linkages occurred at different data pipeline stages, creating unnecessary delays. As the YDI continues to expand, a decision was made to create a Master File that includes the codes and names of schools, their districts, and health areas."
   }
 ]
