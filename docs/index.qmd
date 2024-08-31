@@ -2,6 +2,7 @@
 title: "Jorge Andrés Delgado-Ron"
 about:
     template: trestles
+    image: img/jandres.jpg
     links:
         - icon: linkedin
           text: LinkedIn
@@ -17,7 +18,6 @@ about:
           url: https://scholar.google.com/citations?user=Xxji6OcAAAAJ
         - text: "{{< ai osf >}} OSF"
           url: https://osf.io/v562d
-image: img/jandres.jpg
 comments: false
 ---
 
