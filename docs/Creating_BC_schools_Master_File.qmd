@@ -1,4 +1,3 @@
-
 ---
 title: "Creating the BC Schools Master File"
 author: "Jorge Andrés Delgado-Ron"
@@ -139,9 +138,11 @@ mailing_missing$health_authority <-
                      HA_finder$short_postal_code)]
 ```
 
-Finally, we put together the broken dataframe and save it as csv to import it into the caraspace.
+Finally, we put together the pieces of the broken data frame and save it as a csv file to import it into the caraspace.
 
 ```{r}
 master_file <- rbind(mailing_complete,mailing_missing)
 write.csv(x = master_file, file = "BC_schools_master_file.csv")
 ```
+
+Download the file [here](BC_schools_master_file.csv). Read more R stories [here](index.html)!

@@ -232,11 +232,12 @@ $ HA                &lt;chr&gt; "Interior", "Interior", "Northern", "Interior", 
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  HA_finder<span class="sc">$</span>HA[<span class="fu">match</span>(mailing_missing<span class="sc">$</span>short_postal_code,</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                     HA_finder<span class="sc">$</span>short_postal_code)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Finally, we put together the broken dataframe and save it as csv to import it into the caraspace.</p>
+<p>Finally, we put together the pieces of the broken data frame and save it as a csv file to import it into the caraspace.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>master_file <span class="ot">&lt;-</span> <span class="fu">rbind</span>(mailing_complete,mailing_missing)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> master_file, <span class="at">file =</span> <span class="st">"BC_schools_master_file.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Download the file <a href="BC_schools_master_file.csv">here</a>. Read more R stories <a href="index.html">here</a>!</p>
 </section>
 
 </main>

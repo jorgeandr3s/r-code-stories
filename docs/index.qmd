@@ -66,3 +66,7 @@ Delgado-Ron, J. A., Adhikari, B., Van den Bosch, M., Dummer, T., Hong, A., Sandh
 I live in Ottawa, ON, with my wife, Andrea, and my daughter, Alice. I was born in Quito, Ecuador, but spent my formative years in Vancouver, BC. I have been a permanent resident of Canada since 2029.
 
 In my free time, I enjoy reading (mostly non-fiction graphic novels), biking, and playing chess (I have a 1600 chess.com rating). I write as a hobby and have won third place in a national contest of really short stories (my micro tales have been included in a couple of anthologies). I was first published in English in "Writing in the Time of COVID."
+
+## R Code Stories (started in Aug. 2024)
+
+-   [Creating BC Schools Master File](Creating_BC_schools_Master_File.html) is a short data-wrangling story about matching schools with health authorities using publicly available datasets.
