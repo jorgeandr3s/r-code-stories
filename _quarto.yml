@@ -1,10 +1,11 @@
 project:
   type: website
-  pre-render:
-    - scripts/pre_create_papers_file.py
-    - scripts/pre_check_skierg_records.py
-    - scripts/pre_doi_from_rogue_scholar.py
-    - scripts/pre_canonicalise_tags.py
+  output-dir: docs
+#  pre-render:
+    # - scripts/pre_create_papers_file.py
+    # - scripts/pre_check_skierg_records.py
+    # - scripts/pre_doi_from_rogue_scholar.py
+    # - scripts/pre_canonicalise_tags.py
 
 website:
   title: "R Code Stories by J. Andrés Delgado-Ron"
@@ -13,10 +14,10 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: Creating_the_BC_schools_Master_file.html
+      - href: Creating_the_BC_schools_Master_file.qmd
         text: Story 1
   page-footer:
-    left: "(copyleft) Jorge Andrés Delgado-Ron, 2024–. [Disclaimer](disclaimer)"
+    left: "(copyleft) Jorge Andrés Delgado-Ron, 2024. [Disclaimer](disclaimer)"
   twitter-card: false
   open-graph: true
 

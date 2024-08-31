@@ -4,9 +4,6 @@ author: "Jorge Andrés Delgado-Ron"
 affiliation: "CHART Lab"
 format: html
 editor: visual
-project:
-  type: website
-  output-dir: docs
 ---
 
 ## Data sources
@@ -20,6 +17,8 @@ This document uses two data sources:
 1.  The mailing information for all schools from the BC School District and Contact Information website (<https://bcschoolcontacts.gov.bc.ca/>). Click "Download Schools Info" followed up by "All schools"; and
 
 2.  BC Stats' Translation of Place Names into Administrative Areas. You can search this file with quotation marks at the BC Stats website ([https://www2.gov.bc.ca/gov/search)](https://www2.gov.bc.ca/gov/search?id=2E4C7D6BCAA4470AAAD2DCADF662E6A0&q=%22Translation%20of%20Place%20Names%20into%20Administrative%20Areas%22), but you will have better luck with the direct link (below).
+
+## Importing Data
 
 Loading the files:
 
@@ -43,6 +42,8 @@ admin_areas <- openxlsx::read.xlsx("https://www2.gov.bc.ca/assets/gov/data/geogr
   slice(.,-1) %>% #The first row is empty data
   rename(health_authority_name = x11) 
 ```
+
+## Data wrangling
 
 Let's take a look at the `mailing` dataset:
 
@@ -98,7 +99,7 @@ unique(mailing$school_district[is.na(mailing$health_authority)])
 
 Ok, I just googled it!
 
-*The Conseil scolaire francophone de la Colombie-Britannique is the French-language school board for all French schools located in British Columbia.*
+> *The Conseil scolaire francophone de la Colombie-Britannique is the French-language school board for all French schools located in British Columbia.*
 
 This is an interesting problem because district 93 is the only one that can be located in many health authorities. So, we are going to find the health authority for each school using their 3-character postal code. But first, I want to make sure all missing postal codes can be matched with existing postal codes.
 
@@ -145,4 +146,6 @@ master_file <- rbind(mailing_complete,mailing_missing)
 write.csv(x = master_file, file = "BC_schools_master_file.csv")
 ```
 
-Download the file [here](BC_schools_master_file.csv). Read more R stories [here](index.html)!
+## Downloads
+
+Download the file [here](BC_schools_master_file.csv).
