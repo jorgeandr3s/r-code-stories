@@ -1,0 +1,19 @@
+---
+title: "Index"
+---
+
+# Welcome to My Quarto Projects
+
+Below are links to various Quarto documents hosted on this site:
+
+## Projects
+
+-   [Project 1: Creating BC schools Master File](Creating_BC_schools_Master_File.html)
+
+## About Me
+
+-   [About](https://doctor.delgado.ec)
+
+## Contact
+
+-   [Get in Touch](doctor.delgado.ec/contact)
