@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Jorge Andrés Delgado-Ron</title>
+<title>Jorge Andrés Delgado-Ron – R Code Stories by J. Andrés Delgado-Ron</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,50 +23,151 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="index_files/libs/quarto-html/quarto.js"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="index_files/libs/quarto-html/anchor.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="application/ld+json">{"@context":"http://www.schema.org","@type":"person","name":"Jorge Andrés Delgado-Ron","jobTitle":"Data Analyst","height":"175 cm","gender":"male","description":"J. Andrés Delgado-Ron is a public health researcher and social epidemiologist.","url":"https://jorgeandr3s.github.io/r-code-stories/","image":"https://jorgeandr3s.github.io/r-code-stories/img/jandres.jpg","address":{"@type":"PostalAddress","addressLocality":"Ottawa","addressRegion":"ON","postalCode":"K1N5G2","addressCountry":"Canada"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of British Columbia","sameAs":"https://en.wikipedia.org/wiki/University_of_British_Columbia"}],"worksFor":[{"@type":"Organization","name":"Simon Fraser University"}],"birthDate":"1986-07-02","birthPlace":"Quito, Ecuador","nationality":[{"@type":"Country","name":"Ecuador"},{"@type":"Country","name":"Canada (PR)"}]}</script>
 
 
+<meta property="og:title" content="Jorge Andrés Delgado-Ron – R Code Stories by J. Andrés Delgado-Ron">
+<meta property="og:description" content="J. Andrés Delgado-Ron is a social epidemiologist working with data at Simon Fraser University. These are his stoRies">
+<meta property="og:site_name" content="R Code Stories by J. Andrés Delgado-Ron">
 </head>
 
-<body class="fullcontent">
+<body class="nav-fixed">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
-<main class="content" id="quarto-document-content">
-
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">R Code Stories by J. Andrés Delgado-Ron</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Creating_the_BC_schools_Master_file.html"> 
+<span class="menu-text">Story 1</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+  <ul>
+  <li><a href="#bio" id="toc-bio" class="nav-link active" data-scroll-target="#bio">Bio</a></li>
+  <li><a href="#key-research-interests" id="toc-key-research-interests" class="nav-link" data-scroll-target="#key-research-interests">Key research interests</a></li>
+  <li><a href="#teaching" id="toc-teaching" class="nav-link" data-scroll-target="#teaching">Teaching</a></li>
+  <li><a href="#selected-papers" id="toc-selected-papers" class="nav-link" data-scroll-target="#selected-papers">Selected papers</a></li>
+  <li><a href="#personal-life" id="toc-personal-life" class="nav-link" data-scroll-target="#personal-life">Personal life</a></li>
+  <li><a href="#r-code-stories-started-in-aug.-2024" id="toc-r-code-stories-started-in-aug.-2024" class="nav-link" data-scroll-target="#r-code-stories-started-in-aug.-2024">R Code Stories (started in Aug.&nbsp;2024)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<div class="quarto-about-trestles">
+  <div class="about-entity">
+    <img src="img/jandres.jpg" class="about-image
+  rounded " style="width: 20em;">
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Jorge Andrés Delgado-Ron</h1>
 </div>
-
-
-
 <div class="quarto-title-meta">
-
-    
-  
-    
   </div>
-  
-
-
 </header>
+    <div class="about-links">
+  <a href="https://www.linkedin.com/in/andresdelgadoec/" class="about-link" rel="" target="">
+    <i class="bi bi-linkedin"></i>
+     <span class="about-link-text">LinkedIn</span>
+  </a>
+  <a href="https://github.com/jorgeandr3s" class="about-link" rel="" target="">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
+  <a href="mailto:andres@delgado.ec" class="about-link" rel="" target="">
+     <span class="about-link-text"><i class="fa-solid fa-envelope" aria-label="envelope"></i> Email</span>
+  </a>
+  <a href="https://orcid.org/0000-0001-7051-6481" class="about-link" rel="" target="">
+     <span class="about-link-text"><i class="ai  ai-orcid"></i> 0000-0001-7051-6481</span>
+  </a>
+  <a href="https://scholar.google.com/citations?user=Xxji6OcAAAAJ" class="about-link" rel="" target="">
+     <span class="about-link-text"><i class="ai  ai-google-scholar"></i> Google Scholar</span>
+  </a>
+  <a href="https://osf.io/v562d" class="about-link" rel="" target="">
+     <span class="about-link-text"><i class="ai  ai-osf"></i> OSF</span>
+  </a>
+</div>
+  </div>
+  <div class="about-contents"><main class="content" id="quarto-document-content">
 
-
-<script type="application/ld+json">
-{"@context":"http://www.schema.org","@type":"person","name":"Jorge Andrés Delgado-Ron","jobTitle":"Data Analyst","height":"175 cm","gender":"male","description":"J. Andrés Delgado-Ron is a public health researcher and social epidemiologist.","url":"https://jorgeandr3s.github.io/r-code-stories/","image":"https://jorgeandr3s.github.io/r-code-stories/img/jandres.jpg","address":{"@type":"PostalAddress","addressLocality":"Ottawa","addressRegion":"ON","postalCode":"K1N5G2","addressCountry":"Canada"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of British Columbia","sameAs":"https://en.wikipedia.org/wiki/University_of_British_Columbia"}],"worksFor":[{"@type":"Organization","name":"Simon Fraser University"}],"birthDate":"1986-07-02","birthPlace":"Quito, Ecuador","nationality":[{"@type":"Country","name":"Ecuador"},{"@type":"Country","name":"Canada (PR)"}]}
-</script>
+<!-- <script type='application/ld+json'> -->
+<!-- {"@context":"http://www.schema.org","@type":"person","name":"Jorge Andrés Delgado-Ron","jobTitle":"Data Analyst","height":"175 cm","gender":"male","description":"J. Andrés Delgado-Ron is a public health researcher and social epidemiologist.","url":"https://jorgeandr3s.github.io/r-code-stories/","image":"https://jorgeandr3s.github.io/r-code-stories/img/jandres.jpg","address":{"@type":"PostalAddress","addressLocality":"Ottawa","addressRegion":"ON","postalCode":"K1N5G2","addressCountry":"Canada"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of British Columbia","sameAs":"https://en.wikipedia.org/wiki/University_of_British_Columbia"}],"worksFor":[{"@type":"Organization","name":"Simon Fraser University"}],"birthDate":"1986-07-02","birthPlace":"Quito, Ecuador","nationality":[{"@type":"Country","name":"Ecuador"},{"@type":"Country","name":"Canada (PR)"}]} -->
+<!-- </script> -->
 <section id="bio" class="level2">
-<h2 class="anchored" data-anchor-id="bio">Bio</h2>
+<h2 data-anchor-id="bio">Bio</h2>
 <p>I’m a social epidemiologist and public health researcher specializing in data science for causal inference. I authored the thesis <em>Child Development Among Ecuadorian Children Aged Three to Five Born from Intended and Unintended Pregnancies: A Health Equity Analysis</em> and contributed to a range of research projects in the fields of population health and open science public policy.</p>
 <p>I completed my Master of Science in Population and Public Health at the University of British Columbia. I also hold a Master of Public Policy and Global Affairs from UBC, complemented by my Medical Doctor degree from Universidad Tecnológica Equinoccial in Quito, Ecuador. My professional development spans biostatistics, data science, and research methodologies, with certifications from institutions such as Johns Hopkins University, Stanford University, and Vanderbilt University.</p>
 <p>I currently work as a Data Analyst at Simon Fraser University, where I lead data management and analysis initiatives for multiple research projects focusing on health equity and public health outcomes, particularly among marginalized communities. My role involves extensive collaboration with interdisciplinary teams, ensuring the integrity and accuracy of data processes, and contributing to high-impact <a href="https://doctor.delgado.ec/publications/">publications</a> and policy recommendations.</p>
@@ -74,7 +175,7 @@ ul.task-list li input[type="checkbox"] {
 <p>I have consulted for UrbanDesign4Health (2022-2023), Freedom House (2015-2017), Internews (2016), and ChildFund (2020).</p>
 </section>
 <section id="key-research-interests" class="level2">
-<h2 class="anchored" data-anchor-id="key-research-interests">Key research interests</h2>
+<h2 data-anchor-id="key-research-interests">Key research interests</h2>
 <ul>
 <li><strong>Social Epidemiology</strong>: trend analysis, health disparities, social determinants of health, intersectionality, mental health in marginalized populations.</li>
 <li><strong>Causal Inference</strong>: application of advanced statistical methods, identifying causal relationships in public health, mediation analysis, directed acyclic graphs (DAGs)</li>
@@ -83,31 +184,33 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 <section id="teaching" class="level2">
-<h2 class="anchored" data-anchor-id="teaching">Teaching</h2>
+<h2 data-anchor-id="teaching">Teaching</h2>
 <p>During my graduate studies, I served as a Teaching Assistant for SPPH581Y (Winter 2020), where I supported Drs. Peter Berman and Milind Kandlikar in guiding students through the complexities of how institutional, organizational, governance, and political factors influenced national responses to the COVID-19 pandemic.</p>
 <p>At the undergraduate level, I was involved in curriculum development for SPPH 481D: Global Health Policy and Systems in Spring 2022, under the supervision of Dr.&nbsp;Veena Sriram and Dr.&nbsp;Peter Berman. Additionally, I served as an Instructor at the Faculty of Health Sciences at Universidad UTE in Ecuador, where I taught Problem-Based Learning from 2017 to 2018, engaging approximately 150 students.</p>
 </section>
 <section id="selected-papers" class="level2">
-<h2 class="anchored" data-anchor-id="selected-papers">Selected papers</h2>
+<h2 data-anchor-id="selected-papers">Selected papers</h2>
 <p><strong>Salway, T., Delgado-Ron J.A., Rich A.J., Dharma, C., Baams L., &amp; Fish, J. (2024).</strong> <em>Trends in mental health and smoking disparities between sexual minority and heterosexual adults in Canada, 2003-2020.</em> SSM - Population Health 27, 101976. <a href="https://doi.org/10.1016/j.ssmph.2024.101697" class="uri">https://doi.org/10.1016/j.ssmph.2024.101697</a>.</p>
 <p><strong>Delgado-Ron, J. A., Jeyabalan, T., Watt, S., &amp; Salway, T. (2024).</strong> <em>Mitigating invalid data bias in the estimation of sexual orientation disparities in a survey of youth in US and Canada.</em> Child Development. <a href="https://doi.org/10.1111/cdev.14111" class="uri">https://doi.org/10.1111/cdev.14111</a> [In press].</p>
 <p><strong>Delgado-Ron, J. A., López-Jaramillo, P., &amp; Karim, M. E. (2022).</strong> <em>Sodium intake and high blood pressure among adults on caloric deficit: a multi-year cross-sectional analysis of the US population, 2007–2018.</em> Journal of Human Hypertension 36, 968–975. <a href="https://doi.org/10.1038/s41371-021-00614-4" class="uri">https://doi.org/10.1038/s41371-021-00614-4</a> Professional affiliations</p>
 <p>Delgado-Ron, J. A., Adhikari, B., Van den Bosch, M., Dummer, T., Hong, A., Sandhu, J., … &amp; Frank, L. D. (2021). Community design and hypertension: Walkability and park access relationships with cardiovascular health. International Journal of Hygiene and Environmental Health, 237, 113820. <a href="https://doi.org/10.1016/j.ijheh.2021.113820" class="uri">https://doi.org/10.1016/j.ijheh.2021.113820</a></p>
 </section>
 <section id="personal-life" class="level2">
-<h2 class="anchored" data-anchor-id="personal-life">Personal life</h2>
+<h2 data-anchor-id="personal-life">Personal life</h2>
 <p>I live in Ottawa, ON, with my wife, Andrea, and my daughter, Alice. I was born in Quito, Ecuador, but spent my formative years in Vancouver, BC. I have been a permanent resident of Canada since 2029.</p>
 <p>In my free time, I enjoy reading (mostly non-fiction graphic novels), biking, and playing chess (I have a 1600 chess.com rating). I write as a hobby and have won third place in a national contest of really short stories (my micro tales have been included in a couple of anthologies). I was first published in English in “Writing in the Time of COVID.”</p>
 </section>
 <section id="r-code-stories-started-in-aug.-2024" class="level2">
-<h2 class="anchored" data-anchor-id="r-code-stories-started-in-aug.-2024">R Code Stories (started in Aug.&nbsp;2024)</h2>
+<h2 data-anchor-id="r-code-stories-started-in-aug.-2024">R Code Stories (started in Aug.&nbsp;2024)</h2>
 <ul>
 <li><a href="Creating_BC_schools_Master_File.html">Creating BC Schools Master File</a> is a short data-wrangling story about matching schools with health authorities using publicly available datasets.</li>
 </ul>
-</section>
 
-</main>
-<!-- /main column -->
+
+</section>
+</main></div>
+</div>
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -128,13 +231,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -529,6 +625,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>(copyleft) Jorge Andrés Delgado-Ron, 2024–. <a href="disclaimer">Disclaimer</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

@@ -22,9 +22,9 @@ comments: false
 ---
 
 ```{=html}
-<script type='application/ld+json'>
-{"@context":"http://www.schema.org","@type":"person","name":"Jorge Andrés Delgado-Ron","jobTitle":"Data Analyst","height":"175 cm","gender":"male","description":"J. Andrés Delgado-Ron is a public health researcher and social epidemiologist.","url":"https://jorgeandr3s.github.io/r-code-stories/","image":"https://jorgeandr3s.github.io/r-code-stories/img/jandres.jpg","address":{"@type":"PostalAddress","addressLocality":"Ottawa","addressRegion":"ON","postalCode":"K1N5G2","addressCountry":"Canada"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of British Columbia","sameAs":"https://en.wikipedia.org/wiki/University_of_British_Columbia"}],"worksFor":[{"@type":"Organization","name":"Simon Fraser University"}],"birthDate":"1986-07-02","birthPlace":"Quito, Ecuador","nationality":[{"@type":"Country","name":"Ecuador"},{"@type":"Country","name":"Canada (PR)"}]}
-</script>
+<!-- <script type='application/ld+json'> -->
+<!-- {"@context":"http://www.schema.org","@type":"person","name":"Jorge Andrés Delgado-Ron","jobTitle":"Data Analyst","height":"175 cm","gender":"male","description":"J. Andrés Delgado-Ron is a public health researcher and social epidemiologist.","url":"https://jorgeandr3s.github.io/r-code-stories/","image":"https://jorgeandr3s.github.io/r-code-stories/img/jandres.jpg","address":{"@type":"PostalAddress","addressLocality":"Ottawa","addressRegion":"ON","postalCode":"K1N5G2","addressCountry":"Canada"},"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of British Columbia","sameAs":"https://en.wikipedia.org/wiki/University_of_British_Columbia"}],"worksFor":[{"@type":"Organization","name":"Simon Fraser University"}],"birthDate":"1986-07-02","birthPlace":"Quito, Ecuador","nationality":[{"@type":"Country","name":"Ecuador"},{"@type":"Country","name":"Canada (PR)"}]} -->
+<!-- </script> -->
 ```
 ## Bio
 
