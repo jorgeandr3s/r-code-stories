@@ -14,7 +14,7 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: Creating_the_BC_schools_Master_file.qmd
+      - href: Creating_the_BC_schools_Master_File.qmd
         text: Story 1
   page-footer:
     left: "(copyleft) Jorge Andrés Delgado-Ron, 2024. [Disclaimer](disclaimer)"
