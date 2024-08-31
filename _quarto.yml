@@ -8,7 +8,7 @@ project:
     # - scripts/pre_canonicalise_tags.py
 
 website:
-  title: "R Code Stories by J. Andrés Delgado-Ron"
+  title: "R Code Stories"
   description: "J. Andrés Delgado-Ron is a social epidemiologist working with data at Simon Fraser University. These are his stoRies"
   navbar:
     left:

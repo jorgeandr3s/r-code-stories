@@ -23,7 +23,7 @@ This document uses two data sources:
 Loading the files:
 
 ```{r}
-mailing <- read.csv("allschoolcontacts.csv", na.strings = "") %>%
+mailing <- read.csv("data/allschoolcontacts.csv", na.strings = "") %>%
   janitor::clean_names() %>% 
   select(district_number, 
          school_code, 
@@ -143,9 +143,9 @@ Finally, we put together the pieces of the broken data frame and save it as a cs
 
 ```{r}
 master_file <- rbind(mailing_complete,mailing_missing)
-write.csv(x = master_file, file = "BC_schools_master_file.csv")
+write.csv(x = master_file, file = "data/BC_schools_master_file.csv")
 ```
 
 ## Downloads
 
-Download the file [here](BC_schools_master_file.csv).
+Download the file [here](data/BC_schools_master_file.csv).
