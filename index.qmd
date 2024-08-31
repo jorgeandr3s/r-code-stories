@@ -10,8 +10,6 @@ about:
         - icon: github
           text: Github
           url: https://github.com/jorgeandr3s
-        - text: "{{< fa envelope >}} Email"
-          url: mailto:andres@delgado.ec
         - text: "{{< ai orcid >}} 0000-0001-7051-6481"
           url: https://orcid.org/0000-0001-7051-6481
         - text: "{{< ai google-scholar >}} Google Scholar"
@@ -20,6 +18,11 @@ about:
           url: https://osf.io/v562d
         - text: "{{< ai researchgate >}} ResearchGate" 
           url: https://www.researchgate.net/profile/Jorge-Delgado-Ron
+        - text: "{{< ai pubmed >}} PubMed" 
+          url: https://www.ncbi.nlm.nih.gov/myncbi/1FoUg9VxF1tk-/bibliography/public/
+        - text: "{{< fa envelope >}} Email"
+          url: mailto:andres@delgado.ec
+
 comments: false
 ---
 
