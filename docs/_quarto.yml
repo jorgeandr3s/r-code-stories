@@ -11,7 +11,7 @@ website:
   description: "J. Andrés Delgado-Ron is a social epidemiologist working with data at Simon Fraser University. These are his stoRies"
   navbar:
     left:
-      - href: index.html
+      - href: index.qmd
         text: Home
       - href: Creating_the_BC_schools_Master_file.html
         text: Story 1
