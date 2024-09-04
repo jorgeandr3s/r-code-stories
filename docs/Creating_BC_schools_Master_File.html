@@ -192,9 +192,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-sources" class="level2">
 <h2 class="anchored" data-anchor-id="data-sources">Data sources</h2>
-<p>This document uses two data sources:</p>
+<p>This document uses three data sources:</p>
 <ol type="1">
-<li><p>The mailing information for all schools from the BC School District and Contact Information website (<a href="https://bcschoolcontacts.gov.bc.ca/" class="uri">https://bcschoolcontacts.gov.bc.ca/</a>). Click “Download Schools Info” followed up by “All schools”; and</p></li>
+<li><p>The mailing information for all schools from the BC School District and Contact Information website (<a href="https://bcschoolcontacts.gov.bc.ca/" class="uri">https://bcschoolcontacts.gov.bc.ca/</a>). Click “Download Schools Info” followed up by “All schools”;</p></li>
+<li><p>The mailing information for all districts from the same website. Click “Mailing for All Districts (CSV)”; and</p></li>
 <li><p>BC Stats’ Translation of Place Names into Administrative Areas. You can search this file with quotation marks at the BC Stats website (<a href="https://www2.gov.bc.ca/gov/search?id=2E4C7D6BCAA4470AAAD2DCADF662E6A0&amp;q=%22Translation%20of%20Place%20Names%20into%20Administrative%20Areas%22">https://www2.gov.bc.ca/gov/search)</a>, but you will have better luck with the direct link (below).</p></li>
 </ol>
 </section>
@@ -216,10 +217,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># You may select other variables in the future </span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># (e.g., enrollment for some grades)</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>admin_areas <span class="ot">&lt;-</span> openxlsx<span class="sc">::</span><span class="fu">read.xlsx</span>(<span class="st">"https://www2.gov.bc.ca/assets/gov/data/geographic/land-use/administrative-boundaries/translation_place_names2019.xlsx"</span>, <span class="at">startRow =</span> <span class="dv">4</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>districts <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/all-mailing.csv"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(.,<span class="sc">-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co">#The first row is empty data</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">health_authority_name =</span> x11) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(district_number,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>         district_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">school_district =</span> district_number)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>admin_areas <span class="ot">&lt;-</span> openxlsx<span class="sc">::</span><span class="fu">read.xlsx</span>(<span class="st">"https://www2.gov.bc.ca/assets/gov/data/geographic/land-use/administrative-boundaries/translation_place_names2019.xlsx"</span>, <span class="at">startRow =</span> <span class="dv">4</span>)<span class="sc">%&gt;%</span> </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(.,<span class="sc">-</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co">#The first row is empty data</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">health_authority_name =</span> x11) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-wrangling" class="level2">
@@ -257,20 +264,36 @@ $ city                 &lt;chr&gt; "JAFFRAY", "FERNIE", "SPARWOOD", "ELKFORD", "
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># substr (target, first_character, last_character)</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mailing<span class="sc">$</span>short_postal_code <span class="ot">&lt;-</span> <span class="fu">substr</span>(mailing<span class="sc">$</span>postal_code,<span class="dv">1</span>,<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now that everything is sorted, we can just add the health authorities from the admin_areas file.</p>
+<p>Now that everything is sorted, we can just add the district name from the <code>districts</code> dataframe and the health authorities from the <code>admin_areas</code> dataframe.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I am telling R to match the two dataframes by school_district,</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># then to find the health_authority_name  variable in the admin_areas dataframe.</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>mailing<span class="sc">$</span>health_authority <span class="ot">&lt;-</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  admin_areas<span class="sc">$</span>health_authority_name[<span class="fu">match</span>(mailing<span class="sc">$</span>school_district,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                          admin_areas<span class="sc">$</span>school_district)]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and to find the district_name  variable in districts</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>mailing<span class="sc">$</span>district_name <span class="ot">&lt;-</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  districts<span class="sc">$</span>district_name[<span class="fu">match</span>(mailing<span class="sc">$</span>school_district,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                                          districts<span class="sc">$</span>school_district)]</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># That is all I needed from this dataframe</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>admin_areas <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Now I repeat the process for health_authority_name in admin_areas</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>mailing<span class="sc">$</span>health_authority <span class="ot">&lt;-</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  admin_areas<span class="sc">$</span>health_authority_name[<span class="fu">match</span>(mailing<span class="sc">$</span>school_district,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                                          admin_areas<span class="sc">$</span>school_district)]</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># That is all I needed from these dataframes</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>admin_areas <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>districts <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Did everyone get a district?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="sc">!</span><span class="fu">is.na</span>(mailing<span class="sc">$</span>district_name))),<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+TRUE 
+ 100 </code></pre>
+</div>
 </div>
 <p>Did everyone get a health authority?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="sc">!</span><span class="fu">is.na</span>(mailing<span class="sc">$</span>health_authority))),<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span><span class="sc">*</span><span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="sc">!</span><span class="fu">is.na</span>(mailing<span class="sc">$</span>health_authority))),<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 FALSE  TRUE 
@@ -279,7 +302,7 @@ FALSE  TRUE
 </div>
 <p>It looks like a few entries did not. Let’s find out which districts are missing.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(mailing<span class="sc">$</span>school_district[<span class="fu">is.na</span>(mailing<span class="sc">$</span>health_authority)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(mailing<span class="sc">$</span>school_district[<span class="fu">is.na</span>(mailing<span class="sc">$</span>health_authority)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 93</code></pre>
 </div>
@@ -290,10 +313,10 @@ FALSE  TRUE
 </blockquote>
 <p>This is an interesting problem because district 93 is the only one that can be located in many health authorities. So, we are going to find the health authority for each school using their 3-character postal code. But first, I want to make sure all missing postal codes can be matched with existing postal codes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lost_postal_codes <span class="ot">&lt;-</span> mailing<span class="sc">$</span>short_postal_code[<span class="fu">is.na</span>(mailing<span class="sc">$</span>health_authority)]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>known_postal_codes <span class="ot">&lt;-</span> mailing<span class="sc">$</span>short_postal_code[<span class="sc">!</span><span class="fu">is.na</span>(mailing<span class="sc">$</span>health_authority)]</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(lost_postal_codes <span class="sc">%in%</span> known_postal_codes) <span class="co">#Verifying no one is left behind</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lost_postal_codes <span class="ot">&lt;-</span> mailing<span class="sc">$</span>short_postal_code[<span class="fu">is.na</span>(mailing<span class="sc">$</span>health_authority)]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>known_postal_codes <span class="ot">&lt;-</span> mailing<span class="sc">$</span>short_postal_code[<span class="sc">!</span><span class="fu">is.na</span>(mailing<span class="sc">$</span>health_authority)]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(lost_postal_codes <span class="sc">%in%</span> known_postal_codes) <span class="co">#Verifying no one is left behind</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 TRUE 
@@ -302,13 +325,13 @@ TRUE
 </div>
 <p>Success! Now let’s get to work. First I want to create a dataframe with short postal codes and health authorities</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>HA_finder <span class="ot">&lt;-</span> mailing  <span class="sc">%&gt;%</span> </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(health_authority)) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(short_postal_code) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">HA =</span> health_authority) <span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique.array</span>() </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(HA_finder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>HA_finder <span class="ot">&lt;-</span> mailing  <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(health_authority)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(short_postal_code) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">HA =</span> health_authority) <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unique.array</span>() </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(HA_finder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 207
 Columns: 2
@@ -318,19 +341,19 @@ $ HA                &lt;chr&gt; "Interior", "Interior", "Northern", "Interior", 
 </div>
 <p>Next, I want to separate the French schools from the rest. Technically speaking, this is not really required. But it is easier to understand the code this way.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mailing_complete <span class="ot">&lt;-</span> mailing <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(health_authority))</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>mailing_missing  <span class="ot">&lt;-</span> mailing <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(health_authority))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mailing_complete <span class="ot">&lt;-</span> mailing <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(health_authority))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>mailing_missing  <span class="ot">&lt;-</span> mailing <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(health_authority))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can match the health authority by postal code, just like we did before with school districts.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mailing_missing<span class="sc">$</span>health_authority <span class="ot">&lt;-</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  HA_finder<span class="sc">$</span>HA[<span class="fu">match</span>(mailing_missing<span class="sc">$</span>short_postal_code,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                     HA_finder<span class="sc">$</span>short_postal_code)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mailing_missing<span class="sc">$</span>health_authority <span class="ot">&lt;-</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  HA_finder<span class="sc">$</span>HA[<span class="fu">match</span>(mailing_missing<span class="sc">$</span>short_postal_code,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                     HA_finder<span class="sc">$</span>short_postal_code)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally, we put together the pieces of the broken data frame and save it as a csv file to import it into the caraspace.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>master_file <span class="ot">&lt;-</span> <span class="fu">rbind</span>(mailing_complete,mailing_missing)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> master_file, <span class="at">file =</span> <span class="st">"data/BC_schools_master_file.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>master_file <span class="ot">&lt;-</span> <span class="fu">rbind</span>(mailing_complete,mailing_missing)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> master_file, <span class="at">file =</span> <span class="st">"data/BC_schools_master_file.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="downloads" class="level2">

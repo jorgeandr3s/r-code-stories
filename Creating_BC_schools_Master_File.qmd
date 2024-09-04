@@ -16,11 +16,13 @@ The [Youth Development Instrument](https://chartlab.ca/about-ydi/) (YDI) is a su
 library(dplyr)
 ```
 
-This document uses two data sources:
+This document uses three data sources:
 
-1.  The mailing information for all schools from the BC School District and Contact Information website (<https://bcschoolcontacts.gov.bc.ca/>). Click "Download Schools Info" followed up by "All schools"; and
+1.  The mailing information for all schools from the BC School District and Contact Information website (<https://bcschoolcontacts.gov.bc.ca/>). Click "Download Schools Info" followed up by "All schools";
 
-2.  BC Stats' Translation of Place Names into Administrative Areas. You can search this file with quotation marks at the BC Stats website ([https://www2.gov.bc.ca/gov/search)](https://www2.gov.bc.ca/gov/search?id=2E4C7D6BCAA4470AAAD2DCADF662E6A0&q=%22Translation%20of%20Place%20Names%20into%20Administrative%20Areas%22), but you will have better luck with the direct link (below).
+2.  The mailing information for all districts from the same website. Click "Mailing for All Districts (CSV)"; and
+
+3.  BC Stats' Translation of Place Names into Administrative Areas. You can search this file with quotation marks at the BC Stats website ([https://www2.gov.bc.ca/gov/search)](https://www2.gov.bc.ca/gov/search?id=2E4C7D6BCAA4470AAAD2DCADF662E6A0&q=%22Translation%20of%20Place%20Names%20into%20Administrative%20Areas%22), but you will have better luck with the direct link (below).
 
 ## Importing Data
 
@@ -40,6 +42,12 @@ mailing <- read.csv("data/allschoolcontacts.csv", na.strings = "") %>%
   rename(school_district = district_number)
 # You may select other variables in the future 
 # (e.g., enrollment for some grades)
+
+districts <- read.csv("data/all-mailing.csv") %>%
+  janitor::clean_names() %>% 
+  select(district_number,
+         district_name) %>% 
+  rename(school_district = district_number)
 
 admin_areas <- openxlsx::read.xlsx("https://www2.gov.bc.ca/assets/gov/data/geographic/land-use/administrative-boundaries/translation_place_names2019.xlsx", startRow = 4)%>% 
   janitor::clean_names() %>% 
@@ -76,17 +84,30 @@ We also need the short version of the postal code for later.
 mailing$short_postal_code <- substr(mailing$postal_code,1,3)
 ```
 
-Now that everything is sorted, we can just add the health authorities from the admin_areas file.
+Now that everything is sorted, we can just add the district name from the `districts` dataframe and the health authorities from the `admin_areas` dataframe.
 
 ```{r}
 # I am telling R to match the two dataframes by school_district,
-# then to find the health_authority_name  variable in the admin_areas dataframe.
+# and to find the district_name  variable in districts
+mailing$district_name <-
+  districts$district_name[match(mailing$school_district,
+                                          districts$school_district)]
+
+# Now I repeat the process for health_authority_name in admin_areas
+
 mailing$health_authority <-
   admin_areas$health_authority_name[match(mailing$school_district,
                                           admin_areas$school_district)]
 
-# That is all I needed from this dataframe
+# That is all I needed from these dataframes
 admin_areas <- NULL
+districts <- NULL
+```
+
+Did everyone get a district?
+
+```{r}
+round(100*prop.table(table(!is.na(mailing$district_name))),1)
 ```
 
 Did everyone get a health authority?
