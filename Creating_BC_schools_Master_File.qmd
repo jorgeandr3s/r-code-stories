@@ -173,4 +173,4 @@ write.csv(x = master_file, file = "data/BC_schools_master_file.csv")
 
 ## Downloads
 
-Download the file [here](data/BC_schools_master_file.csv).
+[BC Schools Master File](https://jorgeandr3s.github.io/r-code-stories/data/BC_schools_master_file.csv) by [Jorge Andrés Delgado-Ron](https://jorgeandr3s.github.io/r-code-stories/) and its associated associated [metadata](data/BC_schools_master_file_metadata.xml) are marked with [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/?ref=chooser-v1) <img src="https://chooser-beta.creativecommons.org/img/cc-logo.f0ab4ebe.svg" alt="CC icon" style="width: 1em;"/><img src="https://chooser-beta.creativecommons.org/img/cc-zero.f5450231.svg" alt="CC0 icon" style="width: 1em;"/> and free to download and use.

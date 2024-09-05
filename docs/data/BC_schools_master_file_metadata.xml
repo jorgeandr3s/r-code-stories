@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:title>BC Schools Master File</dc:title>
+<dc:creator>CHART Lab Data Manager</dc:creator>
+<dc:subject>British Columbia</dc:subject>
+<dc:description>The BC Schools Master File provides contact information for schools, their district, and health area. It was created by merging public mailing information and BC Stats documentation on administrative areas (to add the corresponding health areas). 
+
+An in-depth process is available at https://jorgeandr3s.github.io/r-code-stories/Creating_BC_schools_Master_File.html</dc:description>
+<dc:publisher>CHART Lab Data Manager</dc:publisher>
+<dc:date>2024-09-05</dc:date>
+<dc:type>Dataset</dc:type>
+<dc:format>csv</dc:format>
+<dc:identifier>https://jorgeandr3s.github.io/r-code-stories/data/BC_schools_master_file.csv</dc:identifier>
+<dc:source>Translation of Place Names into Administrative Areas from the BC Stats website (https://www2.gov.bc.ca/gov/search)</dc:source>
+<dc:language>en-CA</dc:language>
+<dc:coverage>British Columbia</dc:coverage>
+<dc:rights>Public Domain</dc:rights>
+</metadata>
