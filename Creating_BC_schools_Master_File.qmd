@@ -38,7 +38,10 @@ mailing <- read.csv("data/allschoolcontacts.csv", na.strings = "") %>%
          physical_postal_code,
          school_category, 
          type,
-         city) %>% 
+         city,
+         grade_10_enrollment, # added 2024-10-01 to
+         grade_11_enrollment, # reduce processing times
+         grade_12_enrollment) %>% 
   rename(school_district = district_number)
 # You may select other variables in the future 
 # (e.g., enrollment for some grades)
